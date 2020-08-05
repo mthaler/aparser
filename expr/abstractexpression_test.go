@@ -2,6 +2,8 @@ package expr
 
 import (
 	"aparser"
+	"aparser/ast"
+	"reflect"
 	"testing"
 )
 
@@ -53,16 +55,16 @@ func checkNotRead(t *testing.T, b *aparser.Buffer, e Expression) {
 	}
 }
 
-//func checkEvaluate(t *testing.T, o, expected interface{}) {
-//	n, ok := o.(ast.Node)
-//	if !ok {
-//		t.Errorf("Object %v not a node", o)
-//	}
-//	r, err := n.Evaluate()
-//	if err != nil {
-//		t.Errorf("Could not evalue node %v", n)
-//	}
-//	if !reflect.DeepEqual(r, expected) {
-//		t.Errorf("Expected %v, actual %v", expected, r)
-//	}
-//}
+func checkEvaluate(t *testing.T, o, expected interface{}) {
+	n, ok := o.(ast.Node)
+	if !ok {
+		t.Errorf("Object %v not a node", o)
+	}
+	r, err := n.Evaluate()
+	if err != nil {
+		t.Errorf("Could not evalue node %v", n)
+	}
+	if !reflect.DeepEqual(r, expected) {
+		t.Errorf("Expected %v, actual %v", expected, r)
+	}
+}

@@ -2,6 +2,7 @@ package expr
 
 import (
 	"aparser"
+	"aparser/ast"
 	"testing"
 )
 
@@ -17,14 +18,14 @@ func Test_charLiteralExpression_Read(t *testing.T) {
 
 func TestDoubleLiteralExpression_Read(t *testing.T) {
 	e := doubleLiteral()
-	//e.SetCreateNode(ast.CreateDoubleOperand)
+	e.SetCreateNode(ast.CreateDoubleOperand)
 	b := aparser.CreateBuffer("foo")
 	checkNotRead(t, b, e)
 	b = aparser.CreateBuffer("3.14")
 	checkRead(t, b, e)
 	checkPosition(t, b, 4)
-	//ast := ast.CreateAST(b)
-	//checkEvaluate(t, ast, 3.14)
+	a := ast.CreateAST(b)
+	checkEvaluate(t, a, 3.14)
 }
 
 func Test_stringLiteral(t *testing.T) {
