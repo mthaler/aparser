@@ -39,12 +39,25 @@ func TestArithmeticExpressionSimple(t *testing.T) {
 	checkEvaluate(t, a, 0.75)
 }
 
-func Test_arithmeticExpression(t *testing.T) {
+func TestArithmeticExpressionGroups(t *testing.T) {
 	e := arithmeticExpression()
-	b := aparser.CreateBuffer("3.14")
+	b := aparser.CreateBuffer("(3 + 4)")
 	checkRead(t, b, e)
-	checkPosition(t, b, 4)
-	b = aparser.CreateBuffer("2 * (3 + 4)")
+	checkPosition(t, b, 7)
+	a := ast.CreateAST(b)
+	checkEvaluate(t, a, 7.0)
+	b = aparser.CreateBuffer("3 * (4 + 5)")
 	checkRead(t, b, e)
 	checkPosition(t, b, 11)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, 27.0)
+}
+
+func TestArithmeticExpressionFunction(t *testing.T) {
+	e := arithmeticExpression()
+	b := aparser.CreateBuffer("abs(-5)")
+	checkRead(t, b, e)
+	checkPosition(t, b, 7)
+	a := ast.CreateAST(b)
+	checkEvaluate(t, a, 5.0)
 }

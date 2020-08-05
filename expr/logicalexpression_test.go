@@ -29,7 +29,7 @@ func TestLogicalExpressionSimple(t *testing.T) {
 	checkEvaluate(t, a, true)
 }
 
-func TestLogicalExpressionWithGroup(t *testing.T) {
+func TestLogicalExpressionGroups(t *testing.T) {
 	e := logicalExpression()
 	b := aparser.CreateBuffer("false || (true && false)")
 	checkRead(t, b, e)
