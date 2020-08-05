@@ -13,6 +13,11 @@ func TestLogicalExpressionLiterals(t *testing.T) {
 	checkPosition(t, b, 5)
 	a := ast.CreateAST(b)
 	checkEvaluate(t, a, false)
+	b = aparser.CreateBuffer("true")
+	checkRead(t, b, e)
+	checkPosition(t, b, 4)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, true)
 }
 
 func TestLogicalExpressionSimple(t *testing.T) {
