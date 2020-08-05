@@ -6,7 +6,16 @@ import (
 	"testing"
 )
 
-func TestLogicalExpression(t *testing.T) {
+func TestLogicalExpressionLiterals(t *testing.T) {
+	e := logicalExpression()
+	b := aparser.CreateBuffer("false")
+	checkRead(t, b, e)
+	checkPosition(t, b, 5)
+	a := ast.CreateAST(b)
+	checkEvaluate(t, a, false)
+}
+
+func TestLogicalExpressionSimple(t *testing.T) {
 	e := logicalExpression()
 	b := aparser.CreateBuffer("false || true")
 	checkRead(t, b, e)
