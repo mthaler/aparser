@@ -53,17 +53,17 @@ func createUnaryNode(code []interface{}) Node {
 func createBinaryNode(code []interface{}) Node {
 	b, ok := code[0].(binaryOperation)
 	if ok {
-		l, ok := code[1].(Node) // todo: test for operand node
+		l, ok := code[1].(operandNode)
 		if ok {
 			b.left = l
 		} else {
 			b.left = createNode(code[1].([]interface{}))
 		}
-		r, ok := code[2].(Node) // todo: test for operand node
+		r, ok := code[2].(operandNode)
 		if ok {
 			b.right = r
 		} else {
-			b.right = createNode(code[1].([]interface{}))
+			b.right = createNode(code[2].([]interface{}))
 		}
 		return b
 	} else {
