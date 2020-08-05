@@ -127,7 +127,7 @@ func CreateFunction(b *aparser.Buffer) interface{} {
 		c := b.CurrentCodeBlock()
 		f, ok := c[0].(identifier)
 		if ok {
-			switch len(c) {
+			switch len(c) - 1 {
 			case 1:
 				c[0] = unaryOperation{funcName: f.name}
 			case 2:
