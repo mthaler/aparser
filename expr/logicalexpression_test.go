@@ -31,4 +31,9 @@ func TestLogicalExpressionWithGroup(t *testing.T) {
 	checkPosition(t, b, 24)
 	a := ast.CreateAST(b)
 	checkEvaluate(t, a, false)
+	b = aparser.CreateBuffer("(true ||false) || (true && false)")
+	checkRead(t, b, e)
+	checkPosition(t, b, 33)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, true)
 }

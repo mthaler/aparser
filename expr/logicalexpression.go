@@ -14,9 +14,9 @@ func logicalExpression() recursiveExpression {
 	xor := and(ws, charLiteral('^'), ws)
 
 	group := and(ws, charLiteral('('), ws, &term, ws, charLiteral(')'), ws)
-	operand := or(boolean, group)
+	op := or(boolean, group)
 
-	term.value = and(operand, zeroOrMore(and(or(a, o, xor), operand)))
+	term.value = and(op, zeroOrMore(and(or(a, o, xor), op)))
 
 	boolean.SetCreateNode(ast.CreateBooleanOperand)
 	a.SetCreateNode(ast.CreateBinaryOperation)
