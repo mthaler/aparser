@@ -66,6 +66,16 @@ func TestArithmeticExpressionGroups(t *testing.T) {
 	checkPosition(t, b, 11)
 	a = ast.CreateAST(b)
 	checkEvaluate(t, a, 27.0)
+	b = aparser.CreateBuffer("false || (true && false)")
+	checkRead(t, b, e)
+	checkPosition(t, b, 24)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, false)
+	b = aparser.CreateBuffer("(true ||false) || (true && false)")
+	checkRead(t, b, e)
+	checkPosition(t, b, 33)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, true)
 }
 
 func TestArithmeticExpressionFunction(t *testing.T) {
