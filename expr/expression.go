@@ -16,9 +16,9 @@ import (
 )
 
 type Expression interface {
+	parse(buffer *aparser.Buffer) bool
 	CreateNode() func(buffer *aparser.Buffer) interface{}
 	SetCreateNode(m func(buffer *aparser.Buffer) interface{})
-	parse(buffer *aparser.Buffer) bool
 }
 
 func Parse(e Expression, buffer *aparser.Buffer) bool {
