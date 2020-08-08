@@ -1,12 +1,12 @@
 /*
-Package expr implements a simple library for parsing expressions.
+Package expr implements a simple library for parsing arithmetic expressions.
 
 There are two types of expressions: simple expressions and complex expressions.
 
 Examples for simple expressions are charLiteralExpression which parses a char literal, e.g. '(' or ')',
 stringLiteralExpression which parses a string, e.g. "false" or "true".
 
-An example for a complex expression is orderedChoiceExpresssion which can be used to e.g. build a boolean
+An example for a complex expression is orderedChoiceExpression which can be used to e.g. build a boolean
 literal expression that parses both "false" or "true".
 */
 package expr
