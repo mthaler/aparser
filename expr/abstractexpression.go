@@ -5,16 +5,7 @@ import (
 )
 
 type abstractExpression struct {
-	id         string
 	createNode func(buffer *aparser.Buffer) interface{}
-}
-
-func (a *abstractExpression) Id() string {
-	return a.id
-}
-
-func (a *abstractExpression) SetId(id string) {
-	a.id = id
 }
 
 func (a *abstractExpression) CreateNode() func(buffer *aparser.Buffer) interface{} {

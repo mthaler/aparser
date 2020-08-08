@@ -16,8 +16,6 @@ import (
 )
 
 type Expression interface {
-	Id() string
-	SetId(id string)
 	CreateNode() func(buffer *aparser.Buffer) interface{}
 	SetCreateNode(m func(buffer *aparser.Buffer) interface{})
 	parse(buffer *aparser.Buffer) bool
