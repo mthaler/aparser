@@ -13,6 +13,16 @@ func TestArithmeticExpressionLiteral(t *testing.T) {
 	checkPosition(t, b, 4)
 	a := ast.CreateAST(b)
 	checkEvaluate(t, a, 3.14)
+	b = aparser.CreateBuffer("false")
+	checkRead(t, b, e)
+	checkPosition(t, b, 5)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, false)
+	b = aparser.CreateBuffer("true")
+	checkRead(t, b, e)
+	checkPosition(t, b, 4)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, true)
 }
 
 func TestArithmeticExpressionSimple(t *testing.T) {
