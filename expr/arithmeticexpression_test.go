@@ -47,6 +47,11 @@ func TestArithmeticExpressionSimple(t *testing.T) {
 	checkPosition(t, b, 5)
 	a = ast.CreateAST(b)
 	checkEvaluate(t, a, 0.75)
+	b = aparser.CreateBuffer("false || true")
+	checkRead(t, b, e)
+	checkPosition(t, b, 13)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, true)
 }
 
 func TestArithmeticExpressionGroups(t *testing.T) {
