@@ -6,7 +6,6 @@ type Code struct {
 	Code                  []interface{}
 }
 
-
 func (c *Code) CurrentCodeBlockStart() int {
 	return c.currentCodeBlockStart
 }

@@ -21,4 +21,3 @@ func (o orderedChoiceExpression) parse(buffer *aparser.Buffer) bool {
 	}
 	return false
 }
-

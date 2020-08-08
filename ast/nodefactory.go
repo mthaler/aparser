@@ -143,4 +143,3 @@ func CreateFunction(b *aparser.Buffer) interface{} {
 		}
 	}
 }
-

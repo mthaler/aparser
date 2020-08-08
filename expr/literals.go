@@ -98,4 +98,3 @@ func (c caseInsensitiveStringLiteralExpression) parse(buffer *aparser.Buffer) bo
 		return false
 	}
 }
-

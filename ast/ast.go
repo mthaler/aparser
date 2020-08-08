@@ -97,4 +97,3 @@ func createTernaryNode(code []interface{}) Node {
 		panic("first element not a ternary operation")
 	}
 }
-

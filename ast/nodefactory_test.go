@@ -82,7 +82,7 @@ func Test_createBinaryLeftAssocNode(t *testing.T) {
 	b = aparser.CreateBuffer("4")
 	b.SetCurrentPosition(len("4"))
 	o2 := CreateDoubleOperand(b)
-	code := []interface{}{ o0, o1, o2 }
+	code := []interface{}{o0, o1, o2}
 	n0 := createBinaryLeftAssocNode(code)
 	n1 := createNode([]interface{}{n0})
 	checkEvaluate(t, n1, -1.0)

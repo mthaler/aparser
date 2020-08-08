@@ -25,7 +25,6 @@ func Test_evaluateNumeric2(t *testing.T) {
 	checkResult(t, r, err, 12.0)
 }
 
-
 func Test_evaluateBoolean(t *testing.T) {
 	r, err := evaluateBoolean(true, true, "&&")
 	checkResult(t, r, err, true)

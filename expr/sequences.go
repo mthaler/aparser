@@ -53,4 +53,3 @@ func (o oneOrMoreExpression) parse(buffer *aparser.Buffer) bool {
 	}
 	return success
 }
-

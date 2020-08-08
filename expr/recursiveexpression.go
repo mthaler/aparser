@@ -18,4 +18,3 @@ func (r recursiveExpression) parse(buffer *aparser.Buffer) bool {
 	}
 	return Parse(r.value, buffer)
 }
-

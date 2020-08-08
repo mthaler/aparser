@@ -43,7 +43,7 @@ func Parse(e Expression, buffer *aparser.Buffer) bool {
 		buffer.SetCurrentCodeBlockEndPosition(codeBlockEnd)
 	}
 	buffer.SetMatchPosition(matchPosition)
-	buffer. SetCurrentCodeBlockStartPosition(codeBlockStart)
+	buffer.SetCurrentCodeBlockStartPosition(codeBlockStart)
 	return match
 }
 
