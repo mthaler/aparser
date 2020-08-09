@@ -53,3 +53,29 @@ func (o oneOrMoreExpression) parse(buffer *aparser.Buffer) bool {
 	}
 	return success
 }
+
+func and(expressions ...Expression) Expression {
+	l := len(expressions)
+	if l == 0 {
+		panic("and called with empty expressions")
+	} else if l == 1 {
+		return expressions[0]
+	} else {
+		e1 := expressions[0]
+		e2 := and(expressions[1:]...)
+		return sequence(e1, e2)
+	}
+}
+
+func or(expressions ...Expression) Expression {
+	l := len(expressions)
+	if l == 0 {
+		panic("or called with empty expressions")
+	} else if l == 1 {
+		return expressions[0]
+	} else {
+		e1 := expressions[0]
+		e2 := or(expressions[1:]...)
+		return orderedChoice(e1, e2)
+	}
+}

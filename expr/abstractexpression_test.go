@@ -7,36 +7,6 @@ import (
 	"testing"
 )
 
-func Test_and(t *testing.T) {
-	ws := optionalWhiteSpaces()
-	a := and(ws, stringLiteral("&&"), ws)
-	b := aparser.CreateBuffer("&&")
-	checkRead(t, b, a)
-	checkPosition(t, b, 2)
-	b = aparser.CreateBuffer(" && ")
-	checkRead(t, b, a)
-	checkPosition(t, b, 4)
-}
-
-func Test_or(t *testing.T) {
-	e := or(stringLiteral("true"), stringLiteral("false"))
-	b := aparser.CreateBuffer("foo")
-	if Parse(e, b) != false {
-		t.Error("Expression should not read foo")
-	}
-	checkPosition(t, b, 0)
-	b = aparser.CreateBuffer("true")
-	if Parse(e, b) != true {
-		t.Error("Expression should be able to read true")
-	}
-	checkPosition(t, b, 4)
-	b = aparser.CreateBuffer("false")
-	if Parse(e, b) != true {
-		t.Error("Expression should be able to read true")
-	}
-	checkPosition(t, b, 5)
-}
-
 func checkPosition(t *testing.T, b *aparser.Buffer, pos int) {
 	if b.CurrentPosition() != pos {
 		t.Errorf("Current position should be %d, actual %d", pos, b.CurrentPosition())
