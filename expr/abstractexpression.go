@@ -1,17 +1,15 @@
 package expr
 
-import (
-	"aparser"
-)
+import "aparser"
 
 type abstractExpression struct {
-	createNode func(buffer *aparser.Buffer) interface{}
+	createNode func(text string, c *aparser.Code) interface{}
 }
 
-func (a *abstractExpression) CreateNode() func(buffer *aparser.Buffer) interface{} {
+func (a *abstractExpression) CreateNode() func(text string, c *aparser.Code) interface{} {
 	return a.createNode
 }
 
-func (a *abstractExpression) SetCreateNode(m func(buffer *aparser.Buffer) interface{}) {
-	a.createNode = m
+func (a *abstractExpression) SetCreateNode(createNode func(text string, c *aparser.Code) interface{}) {
+	a.createNode = createNode
 }

@@ -7,18 +7,18 @@ import (
 
 // leafs
 
-func CreateUnaryOperation(b *aparser.Buffer) interface{} {
-	s := strings.TrimSpace(b.CurrentMatch())
+func CreateUnaryOperation(text string, c *aparser.Code) interface{} {
+	s := strings.TrimSpace(text)
 	return unaryOperation{funcName: s}
 }
 
-func CreateBinaryOperation(b *aparser.Buffer) interface{} {
-	s := strings.TrimSpace(b.CurrentMatch())
+func CreateBinaryOperation(text string, c *aparser.Code) interface{} {
+	s := strings.TrimSpace(text)
 	return binaryOperation{operator: s}
 }
 
-func CreateDoubleOperand(b *aparser.Buffer) interface{} {
-	s := strings.TrimSpace(b.CurrentMatch())
+func CreateDoubleOperand(text string, c *aparser.Code) interface{} {
+	s := strings.TrimSpace(text)
 	o, err := parseDoubleOperand(s)
 	if err != nil {
 		panic(err)
@@ -26,8 +26,8 @@ func CreateDoubleOperand(b *aparser.Buffer) interface{} {
 	return o
 }
 
-func CreateBooleanOperand(b *aparser.Buffer) interface{} {
-	s := strings.TrimSpace(b.CurrentMatch())
+func CreateBooleanOperand(text string, c *aparser.Code) interface{} {
+	s := strings.TrimSpace(text)
 	o, err := parseBoolOperand(s)
 	if err != nil {
 		panic(err)
@@ -35,8 +35,8 @@ func CreateBooleanOperand(b *aparser.Buffer) interface{} {
 	return o
 }
 
-func CreateStringOperand(b *aparser.Buffer) interface{} {
-	s := strings.TrimSpace(b.CurrentMatch())
+func CreateStringOperand(text string, c *aparser.Code) interface{} {
+	s := strings.TrimSpace(text)
 	o, err := parseStringOperand(s)
 	if err != nil {
 		panic(err)
@@ -44,18 +44,18 @@ func CreateStringOperand(b *aparser.Buffer) interface{} {
 	return o
 }
 
-func CreateIdentifier(b *aparser.Buffer) interface{} {
-	s := strings.TrimSpace(b.CurrentMatch())
+func CreateIdentifier(text string, c *aparser.Code) interface{} {
+	s := strings.TrimSpace(text)
 	return identifier{name: s}
 }
 
 // branches
 
-func CreateBinaryLeftAssoc(b *aparser.Buffer) interface{} {
-	if b.CurrentCodeBlockLength() == 1 {
+func CreateBinaryLeftAssoc(text string, c *aparser.Code) interface{} {
+	if c.CurrentCodeBlockLength() == 1 {
 		return aparser.PT
 	}
-	code := b.CurrentCodeBlock()
+	code := c.CurrentCodeBlock()
 	return createBinaryLeftAssocNode(code)
 }
 
@@ -75,11 +75,11 @@ func createBinaryLeftAssocNode(code []interface{}) interface{} {
 	return createBinaryLeftAssocNode(result)
 }
 
-func CreateBinaryRightAssoc(b *aparser.Buffer) interface{} {
-	if b.CurrentCodeBlockLength() == 1 {
+func CreateBinaryRightAssoc(text string, c *aparser.Code) interface{} {
+	if c.CurrentCodeBlockLength() == 1 {
 		return aparser.PT
 	}
-	code := b.CurrentCodeBlock()
+	code := c.CurrentCodeBlock()
 	return createBinaryRightAssocNode(code)
 }
 
@@ -99,32 +99,32 @@ func createBinaryRightAssocNode(code []interface{}) interface{} {
 	return createBinaryRightAssocNode(result)
 }
 
-func CreateUnaryPrefix(b *aparser.Buffer) interface{} {
-	if b.CurrentCodeBlockLength() == 1 {
+func CreateUnaryPrefix(text string, c *aparser.Code) interface{} {
+	if c.CurrentCodeBlockLength() == 1 {
 		return aparser.PT
-	} else if b.CurrentCodeBlockLength() == 2 {
-		return b.CurrentCodeBlock()
+	} else if c.CurrentCodeBlockLength() == 2 {
+		return c.CurrentCodeBlock()
 	}
 	panic("current code block has wrong number of elements")
 }
 
-func CreateTernaryConditional(b *aparser.Buffer) interface{} {
-	if b.CurrentCodeBlockLength() != 3 {
+func CreateTernaryConditional(text string, c *aparser.Code) interface{} {
+	if c.CurrentCodeBlockLength() != 3 {
 		return aparser.PT
 	} else {
-		c := b.CurrentCodeBlock()
-		r := make([]interface{}, b.CurrentCodeBlockLength()+1)
+		code := c.CurrentCodeBlock()
+		r := make([]interface{}, c.CurrentCodeBlockLength() + 1)
 		r[0] = ternaryOperation{operator: "?:"}
-		copy(r[1:], c)
+		copy(r[1:], code)
 		return r
 	}
 }
 
-func CreateFunction(b *aparser.Buffer) interface{} {
-	if b.CurrentCodeBlockLength() == 1 {
+func CreateFunction(text string, c *aparser.Code) interface{} {
+	if c.CurrentCodeBlockLength() == 1 {
 		return aparser.PT
 	} else {
-		c := b.CurrentCodeBlock()
+		c := c.CurrentCodeBlock()
 		f, ok := c[0].(identifier)
 		if ok {
 			switch len(c) - 1 {

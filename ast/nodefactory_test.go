@@ -9,25 +9,25 @@ import (
 func Test_createDoubleOperand(t *testing.T) {
 	b := aparser.CreateBuffer("3.14")
 	b.SetCurrentPosition(len("3.14"))
-	o := CreateDoubleOperand(b)
+	o := CreateDoubleOperand(b.CurrentMatch(), &b.Code)
 	checkEvaluate(t, o, 3.14)
 }
 
 func Test_createBooleanOperand(t *testing.T) {
 	b := aparser.CreateBuffer("false")
 	b.SetCurrentPosition(len("false"))
-	o := CreateBooleanOperand(b)
+	o := CreateBooleanOperand(b.CurrentMatch(), &b.Code)
 	checkEvaluate(t, o, false)
 	b = aparser.CreateBuffer("true")
 	b.SetCurrentPosition(len("true"))
-	o = CreateBooleanOperand(b)
+	o = CreateBooleanOperand(b.CurrentMatch(), &b.Code)
 	checkEvaluate(t, o, true)
 }
 
 func Test_createStringOperand(t *testing.T) {
 	b := aparser.CreateBuffer("\"foo\"")
 	b.SetCurrentPosition(len("\"foo\""))
-	o := CreateStringOperand(b)
+	o := CreateStringOperand(b.CurrentMatch(), &b.Code)
 	checkEvaluate(t, o, "foo")
 }
 
@@ -75,13 +75,13 @@ func Test_createResult(t *testing.T) {
 func Test_createBinaryLeftAssocNode(t *testing.T) {
 	b := aparser.CreateBuffer("3")
 	b.SetCurrentPosition(len("3"))
-	o0 := CreateDoubleOperand(b)
+	o0 := CreateDoubleOperand(b.CurrentMatch(), &b.Code)
 	b = aparser.CreateBuffer("-")
 	b.SetCurrentPosition(len("-"))
-	o1 := CreateBinaryOperation(b)
+	o1 := CreateBinaryOperation(b.CurrentMatch(), &b.Code)
 	b = aparser.CreateBuffer("4")
 	b.SetCurrentPosition(len("4"))
-	o2 := CreateDoubleOperand(b)
+	o2 := CreateDoubleOperand(b.CurrentMatch(), &b.Code)
 	code := []interface{}{o0, o1, o2}
 	n0 := createBinaryLeftAssocNode(code)
 	n1 := createNode([]interface{}{n0})
