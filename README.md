@@ -29,3 +29,12 @@ if err != nil {
 }
 fmt.Println(r)
 ```
+
+# Thanks
+
+Thanks to [Rüdiger Klaehn](https://github.com/rklaehn) who wrote the original C# arithmetic expression parser, from which I learned how to write parsers.
+It also inspired and guided me to write this code.
+
+# License
+
+BSD 3-Clause License
