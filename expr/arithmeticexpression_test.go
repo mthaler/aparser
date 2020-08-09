@@ -141,3 +141,17 @@ func TestArithmeticExpressionRelational(t *testing.T) {
 	checkEvaluate(t, a, false)
 }
 
+func TestArithmeticExpressionTernaryOperation(t *testing.T) {
+	e := arithmeticExpression()
+	b := aparser.CreateBuffer("true ? 4 : 5")
+	checkRead(t, b, e)
+	checkPosition(t, b, 12)
+	a := ast.CreateAST(b)
+	checkEvaluate(t, a, 4.0)
+	b = aparser.CreateBuffer("false ? 4 : 5")
+	checkRead(t, b, e)
+	checkPosition(t, b, 13)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, 5.0)
+}
+
