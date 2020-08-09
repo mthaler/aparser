@@ -1,6 +1,6 @@
 # Go Arithmetic Expression Parser
 
-**aparser** provides a library to build arithmetic expression parsers. It also provides a pre-build arithmetic expression parser for common arithmetic expressions.
+**aparser** is a library to build arithmetic expression parsers. It also provides a pre-build arithmetic expression parser for common arithmetic expressions.
 
 The pre-build arithmetic expression parser supports the following operations:
 
