@@ -87,6 +87,9 @@ func arithmeticExpression() recursiveExpression {
 	gt.SetCreateNode(ast.CreateBinaryOperation)
 	ge.SetCreateNode(ast.CreateBinaryOperation)
 
+	eq.SetCreateNode(ast.CreateBinaryOperation)
+	ne.SetCreateNode(ast.CreateBinaryOperation)
+
 	p7.SetCreateNode(ast.CreateUnaryPrefix)
 	p6.SetCreateNode(ast.CreateBinaryRightAssoc)
 	p5.SetCreateNode(ast.CreateBinaryLeftAssoc)

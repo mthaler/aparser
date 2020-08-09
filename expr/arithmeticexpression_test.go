@@ -165,3 +165,27 @@ func TestArithmeticExpressionTernaryOperation(t *testing.T) {
 	checkEvaluate(t, a, 5.0)
 }
 
+func TestArithmeticExpressionEquality(t *testing.T) {
+	e := arithmeticExpression()
+	b := aparser.CreateBuffer("3 == 3")
+	checkRead(t, b, e)
+	checkPosition(t, b, 6)
+	a := ast.CreateAST(b)
+	checkEvaluate(t, a, true)
+	b = aparser.CreateBuffer("3 == 4")
+	checkRead(t, b, e)
+	checkPosition(t, b, 6)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, false)
+	b = aparser.CreateBuffer("3 != 3")
+	checkRead(t, b, e)
+	checkPosition(t, b, 6)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, false)
+	b = aparser.CreateBuffer("3 != 4")
+	checkRead(t, b, e)
+	checkPosition(t, b, 6)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, true)
+}
+
