@@ -4,8 +4,8 @@ import "testing"
 
 func TestCreateBuffer(t *testing.T) {
 	b := CreateBuffer("foo")
-	if string(b.Text) != "foo" {
-		t.Error("Text should be ff")
+	if string(b.text) != "foo" {
+		t.Error("text should be ff")
 	}
 	if b.currentPosition != 0 {
 		t.Error("Current position should be 0")

@@ -5,14 +5,14 @@ import (
 )
 
 type Buffer struct {
-	Text            []rune
+	text            []rune
 	currentPosition int
 	matchPosition   int
 	ast.Code
 }
 
 func CreateBuffer(text string) *Buffer {
-	b := Buffer{Text: []rune(text), Code: ast.Code{}}
+	b := Buffer{text: []rune(text), Code: ast.Code{}}
 	return &b
 }
 
@@ -21,7 +21,7 @@ func (b *Buffer) CurrentPosition() int {
 }
 
 func (b *Buffer) SetCurrentPosition(value int) {
-	if value >= 0 && value <= len(b.Text) {
+	if value >= 0 && value <= len(b.text) {
 		b.currentPosition = value
 	} else {
 		panic("illegal current position")
@@ -37,7 +37,7 @@ func (b *Buffer) IncrementCurrentPositionBy(value int) {
 }
 
 func (b *Buffer) Rest() []rune {
-	return b.Text[b.currentPosition:]
+	return b.text[b.currentPosition:]
 }
 
 func (b *Buffer) MatchPosition() int {
@@ -45,11 +45,11 @@ func (b *Buffer) MatchPosition() int {
 }
 
 func (b *Buffer) CurrentMatch() string {
-	return string(b.Text[b.matchPosition:b.currentPosition])
+	return string(b.text[b.matchPosition:b.currentPosition])
 }
 
 func (b *Buffer) SetMatchPosition(value int) {
-	if value >= 0 && value <= len(b.Text) {
+	if value >= 0 && value <= len(b.text) {
 		b.matchPosition = value
 	} else {
 		panic("illegal match position")
@@ -57,9 +57,9 @@ func (b *Buffer) SetMatchPosition(value int) {
 }
 
 func (b *Buffer) CurrentChar() rune {
-	return b.Text[b.currentPosition]
+	return b.text[b.currentPosition]
 }
 
 func (b *Buffer) HasMoreChars() bool {
-	return b.currentPosition < len(b.Text)
+	return b.currentPosition < len(b.text)
 }
