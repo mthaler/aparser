@@ -8,6 +8,6 @@ func Eval(s string) (interface{}, error) {
 	b := CreateBuffer(s)
 	e := ArithmeticExpression()
 	Parse(e, b)
-	a := ast.CreateAST(&b.Code)
+	a := ast.CreateAST(b.Code.Code)
 	return a.Evaluate()
 }

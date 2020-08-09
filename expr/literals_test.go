@@ -23,7 +23,7 @@ func TestDoubleLiteralExpression_Read(t *testing.T) {
 	b = CreateBuffer("3.14")
 	checkRead(t, b, e)
 	checkPosition(t, b, 4)
-	a := ast.CreateAST(&b.Code)
+	a := ast.CreateAST(b.Code.Code)
 	checkEvaluate(t, a, 3.14)
 }
 
