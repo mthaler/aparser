@@ -188,3 +188,11 @@ func TestArithmeticExpressionEquality(t *testing.T) {
 	checkEvaluate(t, a, true)
 }
 
+func TestArithmeticExpressionStrings(t *testing.T) {
+	e := ArithmeticExpression()
+	b := CreateBuffer("\"foo\" + \"bar\"")
+	checkRead(t, b, e)
+	checkPosition(t, b, 13)
+	a := ast.CreateAST(b.Code.Code)
+	checkEvaluate(t, a, "foobar")
+}
