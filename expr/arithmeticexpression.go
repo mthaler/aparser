@@ -2,6 +2,17 @@ package expr
 
 import "aparser/ast"
 
+/*
+Creates an arithmetic expression parser that can parse common arithmetic expressions
+
+Supported operations:
+- unary: -
+- binary: +, -, *, /, ^ (power), % (modulo)
+- ternary: cond ? a : b, if (cond) a else b
+- logic: &&, ||, !, ^ (exclusive or)
+- relational: ==, !=, <, <=, >, >=
+- functions: abs, acos, asin, atan, cos, cosh, exp, log, log10, sign, sin, sinh, sqrt, tan, tanh, round
+ */
 func ArithmeticExpression() recursiveExpression {
 
 	ws := optionalWhiteSpaces()
