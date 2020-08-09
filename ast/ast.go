@@ -2,8 +2,8 @@ package ast
 
 import "aparser"
 
-func CreateAST(b *aparser.Buffer) Node {
-	return createNode(b.Code.Code)
+func CreateAST(b *aparser.Code) Node {
+	return createNode(b.Code)
 }
 
 func createNode(code []interface{}) Node {
