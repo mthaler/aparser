@@ -1,4 +1,4 @@
-package aparser
+package ast
 
 import "testing"
 

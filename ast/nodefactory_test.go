@@ -1,19 +1,18 @@
 package ast
 
 import (
-	"aparser"
 	"reflect"
 	"testing"
 )
 
 func Test_createDoubleOperand(t *testing.T) {
-	c := aparser.CreateCode()
+	c := CreateCode()
 	o := CreateDoubleOperand("3.14", c)
 	checkEvaluate(t, o, 3.14)
 }
 
 func Test_createBooleanOperand(t *testing.T) {
-	c := aparser.CreateCode()
+	c := CreateCode()
 	o := CreateBooleanOperand("false", c)
 	checkEvaluate(t, o, false)
 	o = CreateBooleanOperand("true", c)
@@ -21,7 +20,7 @@ func Test_createBooleanOperand(t *testing.T) {
 }
 
 func Test_createStringOperand(t *testing.T) {
-	c := aparser.CreateCode()
+	c := CreateCode()
 	o := CreateStringOperand("\"foo\"", c)
 	checkEvaluate(t, o, "foo")
 }
@@ -68,7 +67,7 @@ func Test_createResult(t *testing.T) {
 }
 
 func Test_createBinaryLeftAssocNode(t *testing.T) {
-	c := aparser.CreateCode()
+	c := CreateCode()
 	o0 := CreateDoubleOperand("3", c)
 	o1 := CreateBinaryOperation("-", c)
 	o2 := CreateDoubleOperand("4", c)

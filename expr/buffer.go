@@ -1,16 +1,18 @@
 package expr
 
-import "aparser"
+import (
+	"aparser/ast"
+)
 
 type Buffer struct {
 	Text            []rune
 	currentPosition int
 	matchPosition   int
-	aparser.Code
+	ast.Code
 }
 
 func CreateBuffer(text string) *Buffer {
-	b := Buffer{Text: []rune(text), Code: aparser.Code{}}
+	b := Buffer{Text: []rune(text), Code: ast.Code{}}
 	return &b
 }
 

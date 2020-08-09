@@ -7,17 +7,17 @@ import (
 
 // leafs
 
-func CreateUnaryOperation(text string, c *aparser.Code) interface{} {
+func CreateUnaryOperation(text string, c *Code) interface{} {
 	s := strings.TrimSpace(text)
 	return unaryOperation{funcName: s}
 }
 
-func CreateBinaryOperation(text string, c *aparser.Code) interface{} {
+func CreateBinaryOperation(text string, c *Code) interface{} {
 	s := strings.TrimSpace(text)
 	return binaryOperation{operator: s}
 }
 
-func CreateDoubleOperand(text string, c *aparser.Code) interface{} {
+func CreateDoubleOperand(text string, c *Code) interface{} {
 	s := strings.TrimSpace(text)
 	o, err := parseDoubleOperand(s)
 	if err != nil {
@@ -26,7 +26,7 @@ func CreateDoubleOperand(text string, c *aparser.Code) interface{} {
 	return o
 }
 
-func CreateBooleanOperand(text string, c *aparser.Code) interface{} {
+func CreateBooleanOperand(text string, c *Code) interface{} {
 	s := strings.TrimSpace(text)
 	o, err := parseBoolOperand(s)
 	if err != nil {
@@ -35,7 +35,7 @@ func CreateBooleanOperand(text string, c *aparser.Code) interface{} {
 	return o
 }
 
-func CreateStringOperand(text string, c *aparser.Code) interface{} {
+func CreateStringOperand(text string, c *Code) interface{} {
 	s := strings.TrimSpace(text)
 	o, err := parseStringOperand(s)
 	if err != nil {
@@ -44,14 +44,14 @@ func CreateStringOperand(text string, c *aparser.Code) interface{} {
 	return o
 }
 
-func CreateIdentifier(text string, c *aparser.Code) interface{} {
+func CreateIdentifier(text string, c *Code) interface{} {
 	s := strings.TrimSpace(text)
 	return identifier{name: s}
 }
 
 // branches
 
-func CreateBinaryLeftAssoc(text string, c *aparser.Code) interface{} {
+func CreateBinaryLeftAssoc(text string, c *Code) interface{} {
 	if c.CurrentCodeBlockLength() == 1 {
 		return aparser.PT
 	}
@@ -75,7 +75,7 @@ func createBinaryLeftAssocNode(code []interface{}) interface{} {
 	return createBinaryLeftAssocNode(result)
 }
 
-func CreateBinaryRightAssoc(text string, c *aparser.Code) interface{} {
+func CreateBinaryRightAssoc(text string, c *Code) interface{} {
 	if c.CurrentCodeBlockLength() == 1 {
 		return aparser.PT
 	}
@@ -99,7 +99,7 @@ func createBinaryRightAssocNode(code []interface{}) interface{} {
 	return createBinaryRightAssocNode(result)
 }
 
-func CreateUnaryPrefix(text string, c *aparser.Code) interface{} {
+func CreateUnaryPrefix(text string, c *Code) interface{} {
 	if c.CurrentCodeBlockLength() == 1 {
 		return aparser.PT
 	} else if c.CurrentCodeBlockLength() == 2 {
@@ -108,7 +108,7 @@ func CreateUnaryPrefix(text string, c *aparser.Code) interface{} {
 	panic("current code block has wrong number of elements")
 }
 
-func CreateTernaryConditional(text string, c *aparser.Code) interface{} {
+func CreateTernaryConditional(text string, c *Code) interface{} {
 	if c.CurrentCodeBlockLength() != 3 {
 		return aparser.PT
 	} else {
@@ -120,7 +120,7 @@ func CreateTernaryConditional(text string, c *aparser.Code) interface{} {
 	}
 }
 
-func CreateFunction(text string, c *aparser.Code) interface{} {
+func CreateFunction(text string, c *Code) interface{} {
 	if c.CurrentCodeBlockLength() == 1 {
 		return aparser.PT
 	} else {

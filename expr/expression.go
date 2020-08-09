@@ -13,12 +13,13 @@ package expr
 
 import (
 	"aparser"
+	"aparser/ast"
 )
 
 type Expression interface {
 	parse(buffer *Buffer) bool
-	CreateNode() func(text string, code *aparser.Code) interface{}
-	SetCreateNode(m func(text string, code *aparser.Code) interface{})
+	CreateNode() func(text string, code *ast.Code) interface{}
+	SetCreateNode(m func(text string, code *ast.Code) interface{})
 }
 
 func Parse(e Expression, b *Buffer) bool {
