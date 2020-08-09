@@ -55,3 +55,7 @@ func (c *Code) SetCurrentCodeBlock(o interface{}) {
 		c.currentCodeBlockEnd = c.currentCodeBlockStart + 1
 	}
 }
+
+type passthrough struct{}
+
+var PT = passthrough{}

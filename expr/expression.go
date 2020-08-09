@@ -12,7 +12,6 @@ literal expression that parses both "false" or "true".
 package expr
 
 import (
-	"aparser"
 	"aparser/ast"
 )
 
@@ -33,7 +32,7 @@ func Parse(e Expression, b *Buffer) bool {
 	match := e.parse(b)
 	if match {
 		result := onMatch(e, b)
-		if result != nil && result != aparser.PT {
+		if result != nil && result != ast.PT {
 			b.SetCurrentCodeBlock(result)
 		}
 	} else {
@@ -51,6 +50,6 @@ func onMatch(e Expression, b *Buffer) interface{} {
 	if m != nil {
 		return m(b.CurrentMatch(), &b.Code)
 	} else {
-		return aparser.PT
+		return ast.PT
 	}
 }

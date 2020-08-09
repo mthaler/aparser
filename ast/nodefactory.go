@@ -1,7 +1,6 @@
 package ast
 
 import (
-	"aparser"
 	"strings"
 )
 
@@ -53,7 +52,7 @@ func CreateIdentifier(text string, c *Code) interface{} {
 
 func CreateBinaryLeftAssoc(text string, c *Code) interface{} {
 	if c.CurrentCodeBlockLength() == 1 {
-		return aparser.PT
+		return PT
 	}
 	code := c.CurrentCodeBlock()
 	return createBinaryLeftAssocNode(code)
@@ -77,7 +76,7 @@ func createBinaryLeftAssocNode(code []interface{}) interface{} {
 
 func CreateBinaryRightAssoc(text string, c *Code) interface{} {
 	if c.CurrentCodeBlockLength() == 1 {
-		return aparser.PT
+		return PT
 	}
 	code := c.CurrentCodeBlock()
 	return createBinaryRightAssocNode(code)
@@ -101,7 +100,7 @@ func createBinaryRightAssocNode(code []interface{}) interface{} {
 
 func CreateUnaryPrefix(text string, c *Code) interface{} {
 	if c.CurrentCodeBlockLength() == 1 {
-		return aparser.PT
+		return PT
 	} else if c.CurrentCodeBlockLength() == 2 {
 		return c.CurrentCodeBlock()
 	}
@@ -110,7 +109,7 @@ func CreateUnaryPrefix(text string, c *Code) interface{} {
 
 func CreateTernaryConditional(text string, c *Code) interface{} {
 	if c.CurrentCodeBlockLength() != 3 {
-		return aparser.PT
+		return PT
 	} else {
 		code := c.CurrentCodeBlock()
 		r := make([]interface{}, c.CurrentCodeBlockLength() + 1)
@@ -122,7 +121,7 @@ func CreateTernaryConditional(text string, c *Code) interface{} {
 
 func CreateFunction(text string, c *Code) interface{} {
 	if c.CurrentCodeBlockLength() == 1 {
-		return aparser.PT
+		return PT
 	} else {
 		c := c.CurrentCodeBlock()
 		f, ok := c[0].(identifier)
