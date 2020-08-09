@@ -1,14 +1,13 @@
 package expr
 
 import (
-	"aparser"
 	"aparser/ast"
 	"testing"
 )
 
 func Test_charLiteralExpression_Read(t *testing.T) {
 	e := charLiteral('s')
-	b := aparser.CreateBuffer("test")
+	b := CreateBuffer("test")
 	checkNotRead(t, b, e)
 	b.IncrementCurrentPosition()
 	checkNotRead(t, b, e)
@@ -19,9 +18,9 @@ func Test_charLiteralExpression_Read(t *testing.T) {
 func TestDoubleLiteralExpression_Read(t *testing.T) {
 	e := doubleLiteral()
 	e.SetCreateNode(ast.CreateDoubleOperand)
-	b := aparser.CreateBuffer("foo")
+	b := CreateBuffer("foo")
 	checkNotRead(t, b, e)
-	b = aparser.CreateBuffer("3.14")
+	b = CreateBuffer("3.14")
 	checkRead(t, b, e)
 	checkPosition(t, b, 4)
 	a := ast.CreateAST(&b.Code)
@@ -37,22 +36,22 @@ func Test_stringLiteral(t *testing.T) {
 
 func Test_stringLiteralExpression_Read(t *testing.T) {
 	e := stringLiteral("&&")
-	b := aparser.CreateBuffer("foo")
+	b := CreateBuffer("foo")
 	checkNotRead(t, b, e)
 }
 
 func Test_caseInsensitiveStringLiteralExpression_Read(t *testing.T) {
 	e := caseInsensitiveStringLiteral("Test")
-	b := aparser.CreateBuffer("test")
+	b := CreateBuffer("test")
 	checkRead(t, b, e)
 	checkPosition(t, b, 4)
-	b = aparser.CreateBuffer("Test")
+	b = CreateBuffer("Test")
 	checkRead(t, b, e)
 	checkPosition(t, b, 4)
-	b = aparser.CreateBuffer("TEST")
+	b = CreateBuffer("TEST")
 	checkRead(t, b, e)
 	checkPosition(t, b, 4)
-	b = aparser.CreateBuffer("foo")
+	b = CreateBuffer("foo")
 	checkNotRead(t, b, e)
 	checkPosition(t, b, 0)
 }

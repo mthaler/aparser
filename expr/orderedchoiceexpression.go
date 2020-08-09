@@ -1,7 +1,5 @@
 package expr
 
-import "aparser"
-
 type orderedChoiceExpression struct {
 	*abstractExpression
 	expression1 Expression
@@ -13,7 +11,7 @@ func orderedChoice(e1 Expression, e2 Expression) orderedChoiceExpression {
 	return orderedChoiceExpression{abstractExpression: &a, expression1: e1, expression2: e2}
 }
 
-func (o orderedChoiceExpression) parse(buffer *aparser.Buffer) bool {
+func (o orderedChoiceExpression) parse(buffer *Buffer) bool {
 	if Parse(o.expression1, buffer) {
 		return true
 	} else if Parse(o.expression2, buffer) {

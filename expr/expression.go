@@ -16,12 +16,12 @@ import (
 )
 
 type Expression interface {
-	parse(buffer *aparser.Buffer) bool
+	parse(buffer *Buffer) bool
 	CreateNode() func(text string, code *aparser.Code) interface{}
 	SetCreateNode(m func(text string, code *aparser.Code) interface{})
 }
 
-func Parse(e Expression, b *aparser.Buffer) bool {
+func Parse(e Expression, b *Buffer) bool {
 	currentPosition := b.CurrentPosition()
 	matchPosition := b.MatchPosition()
 	b.SetMatchPosition(b.CurrentPosition())
@@ -45,7 +45,7 @@ func Parse(e Expression, b *aparser.Buffer) bool {
 	return match
 }
 
-func onMatch(e Expression, b *aparser.Buffer) interface{} {
+func onMatch(e Expression, b *Buffer) interface{} {
 	m := e.CreateNode()
 	if m != nil {
 		return m(b.CurrentMatch(), &b.Code)

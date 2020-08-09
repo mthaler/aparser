@@ -1,7 +1,6 @@
 package expr
 
 import (
-	"aparser"
 	"unicode"
 )
 
@@ -14,7 +13,7 @@ func identifier() identifierExpression {
 	return identifierExpression{abstractExpression: &a}
 }
 
-func (i identifierExpression) parse(buffer *aparser.Buffer) bool {
+func (i identifierExpression) parse(buffer *Buffer) bool {
 	count := 0
 	for buffer.HasMoreChars() {
 		if count == 0 {

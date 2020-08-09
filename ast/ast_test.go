@@ -18,8 +18,8 @@ func Test_createUnaryNode(t *testing.T) {
 
 func Test_createBinaryNode(t *testing.T) {
 	b := binaryOperation{operator: "+"}
-	l := doubleOperand{Value: 3}
-	r := doubleOperand{Value: 4}
+	l := newDoubleOperand(3)
+	r := newDoubleOperand(4)
 	code := []interface{}{b, l, r}
 	n := createBinaryNode(code)
 	v, err := n.Evaluate()

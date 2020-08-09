@@ -1,7 +1,6 @@
 package expr
 
 import (
-	"aparser"
 	"unicode"
 )
 
@@ -14,7 +13,7 @@ func whiteSpaces() whitespacesExpression {
 	return whitespacesExpression{abstractExpression: &a}
 }
 
-func (w whitespacesExpression) parse(buffer *aparser.Buffer) bool {
+func (w whitespacesExpression) parse(buffer *Buffer) bool {
 	pos := buffer.CurrentPosition()
 	for buffer.HasMoreChars() && unicode.IsSpace(buffer.CurrentChar()) {
 		buffer.IncrementCurrentPosition()

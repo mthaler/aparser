@@ -1,7 +1,6 @@
 package expr
 
 import (
-	"aparser"
 	"strings"
 )
 
@@ -16,7 +15,7 @@ func quotedString(qcs string, ecs string) quotedStringExpression {
 	return quotedStringExpression{abstractExpression: &a, quoteChars: qcs, escapeChars: ecs}
 }
 
-func (q quotedStringExpression) parse(buffer *aparser.Buffer) bool {
+func (q quotedStringExpression) parse(buffer *Buffer) bool {
 	var quoteChar rune
 	if buffer.HasMoreChars() && q.isQuote(buffer.CurrentChar()) {
 		quoteChar = buffer.CurrentChar()

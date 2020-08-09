@@ -6,6 +6,11 @@ type Code struct {
 	Code                  []interface{}
 }
 
+func CreateCode() *Code {
+	c := Code{currentCodeBlockStart: 0, currentCodeBlockEnd: 0, Code: []interface{}{}}
+	return &c
+}
+
 func (c *Code) CurrentCodeBlockStart() int {
 	return c.currentCodeBlockStart
 }

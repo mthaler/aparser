@@ -1,7 +1,6 @@
 package expr
 
 import (
-	"aparser"
 	"regexp"
 	"strings"
 )
@@ -16,7 +15,7 @@ func charLiteral(c rune) charLiteralExpression {
 	return charLiteralExpression{abstractExpression: &a, char: c}
 }
 
-func (c charLiteralExpression) parse(buffer *aparser.Buffer) bool {
+func (c charLiteralExpression) parse(buffer *Buffer) bool {
 	if buffer.HasMoreChars() && buffer.CurrentChar() == c.char {
 		buffer.IncrementCurrentPosition()
 		return true
@@ -38,7 +37,7 @@ func doubleLiteral() doubleLiteralExpression {
 	return doubleLiteralExpression{abstractExpression: &a, regex: r}
 }
 
-func (d doubleLiteralExpression) parse(buffer *aparser.Buffer) bool {
+func (d doubleLiteralExpression) parse(buffer *Buffer) bool {
 	if buffer.HasMoreChars() {
 		loc := d.regex.FindStringIndex(string(buffer.Rest()))
 		text := make([]rune, 0)
@@ -63,7 +62,7 @@ func stringLiteral(s string) stringLiteralExpression {
 	return stringLiteralExpression{abstractExpression: &a, str: s}
 }
 
-func (s stringLiteralExpression) parse(buffer *aparser.Buffer) bool {
+func (s stringLiteralExpression) parse(buffer *Buffer) bool {
 	if !buffer.HasMoreChars() {
 		return false
 	} else if len(buffer.Rest()) < len(s.str) {
@@ -86,7 +85,7 @@ func caseInsensitiveStringLiteral(s string) caseInsensitiveStringLiteralExpressi
 	return caseInsensitiveStringLiteralExpression{abstractExpression: &a, str: strings.ToLower(s)}
 }
 
-func (c caseInsensitiveStringLiteralExpression) parse(buffer *aparser.Buffer) bool {
+func (c caseInsensitiveStringLiteralExpression) parse(buffer *Buffer) bool {
 	if !buffer.HasMoreChars() {
 		return false
 	} else if len(buffer.Rest()) < len(c.str) {

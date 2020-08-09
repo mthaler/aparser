@@ -1,17 +1,16 @@
-/*
-Package aparser implements a simple library for creating arithmetic expression parsers
-*/
-package aparser
+package expr
+
+import "aparser"
 
 type Buffer struct {
 	Text            []rune
 	currentPosition int
 	matchPosition   int
-	Code
+	aparser.Code
 }
 
 func CreateBuffer(text string) *Buffer {
-	b := Buffer{Text: []rune(text), Code: Code{}}
+	b := Buffer{Text: []rune(text), Code: aparser.Code{}}
 	return &b
 }
 

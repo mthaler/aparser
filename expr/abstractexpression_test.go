@@ -1,25 +1,24 @@
 package expr
 
 import (
-	"aparser"
 	"aparser/ast"
 	"reflect"
 	"testing"
 )
 
-func checkPosition(t *testing.T, b *aparser.Buffer, pos int) {
+func checkPosition(t *testing.T, b *Buffer, pos int) {
 	if b.CurrentPosition() != pos {
 		t.Errorf("Current position should be %d, actual %d", pos, b.CurrentPosition())
 	}
 }
 
-func checkRead(t *testing.T, b *aparser.Buffer, e Expression) {
+func checkRead(t *testing.T, b *Buffer, e Expression) {
 	if !Parse(e, b) {
 		t.Errorf("Expression should be able to read %s", string(b.Rest()))
 	}
 }
 
-func checkNotRead(t *testing.T, b *aparser.Buffer, e Expression) {
+func checkNotRead(t *testing.T, b *Buffer, e Expression) {
 	if Parse(e, b) {
 		t.Errorf("Expression should not be able to read %v", string(b.Rest()))
 	}
