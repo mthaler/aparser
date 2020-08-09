@@ -153,5 +153,15 @@ func TestArithmeticExpressionTernaryOperation(t *testing.T) {
 	checkPosition(t, b, 13)
 	a = ast.CreateAST(b)
 	checkEvaluate(t, a, 5.0)
+	b = aparser.CreateBuffer("if (true) 4 else 5")
+	checkRead(t, b, e)
+	checkPosition(t, b, 18)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, 4.0)
+	b = aparser.CreateBuffer("if (false) 4 else 5")
+	checkRead(t, b, e)
+	checkPosition(t, b, 19)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, 5.0)
 }
 
