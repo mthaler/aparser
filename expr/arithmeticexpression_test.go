@@ -96,3 +96,28 @@ func TestArithmeticExpressionFunction(t *testing.T) {
 	a := ast.CreateAST(b)
 	checkEvaluate(t, a, 5.0)
 }
+
+func TestArithmeticExpressionRelational(t *testing.T) {
+	e := arithmeticExpression()
+	b := aparser.CreateBuffer("3 < 3")
+	checkRead(t, b, e)
+	checkPosition(t, b, 5)
+	a := ast.CreateAST(b)
+	checkEvaluate(t, a, false)
+	b = aparser.CreateBuffer("3 < 4")
+	checkRead(t, b, e)
+	checkPosition(t, b, 5)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, true)
+	b = aparser.CreateBuffer("3 > 3")
+	checkRead(t, b, e)
+	checkPosition(t, b, 5)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, false)
+	b = aparser.CreateBuffer("4 > 3")
+	checkRead(t, b, e)
+	checkPosition(t, b, 5)
+	a = ast.CreateAST(b)
+	checkEvaluate(t, a, true)
+}
+
