@@ -1,14 +1,14 @@
-package aparser
+package expr
 
 import (
+	"aparser"
 	"aparser/ast"
-	"aparser/expr"
 )
 
 func Eval(s string) (interface{}, error) {
-	b := CreateBuffer(s)
-	e := expr.ArithmeticExpression()
-	expr.Parse(e, b)
+	b := aparser.CreateBuffer(s)
+	e := ArithmeticExpression()
+	Parse(e, b)
 	a := ast.CreateAST(b)
 	return a.Evaluate()
 }
