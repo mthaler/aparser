@@ -4,9 +4,6 @@
 
 The pre-build arithmetic expression parser supports the following operations:
 
-Creates an arithmetic expression parser that can parse common arithmetic expressions
-
-Supported operations:
 - unary: -
 - binary: +, -, *, /, ^ (power), % (modulo)
 - ternary: cond ? a : b, if (cond) a else b
