@@ -2,7 +2,7 @@ package expr
 
 import "aparser/ast"
 
-func arithmeticExpression() recursiveExpression {
+func ArithmeticExpression() recursiveExpression {
 
 	ws := optionalWhiteSpaces()
 

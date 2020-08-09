@@ -7,7 +7,7 @@ import (
 )
 
 func TestArithmeticExpressionLiteral(t *testing.T) {
-	e := arithmeticExpression()
+	e := ArithmeticExpression()
 	b := aparser.CreateBuffer("3.14")
 	checkRead(t, b, e)
 	checkPosition(t, b, 4)
@@ -26,7 +26,7 @@ func TestArithmeticExpressionLiteral(t *testing.T) {
 }
 
 func TestArithmeticExpressionSimple(t *testing.T) {
-	e := arithmeticExpression()
+	e := ArithmeticExpression()
 	b := aparser.CreateBuffer("3 + 4")
 	checkRead(t, b, e)
 	checkPosition(t, b, 5)
@@ -65,7 +65,7 @@ func TestArithmeticExpressionSimple(t *testing.T) {
 }
 
 func TestArithmeticExpressionGroups(t *testing.T) {
-	e := arithmeticExpression()
+	e := ArithmeticExpression()
 	b := aparser.CreateBuffer("(3 + 4)")
 	checkRead(t, b, e)
 	checkPosition(t, b, 7)
@@ -89,7 +89,7 @@ func TestArithmeticExpressionGroups(t *testing.T) {
 }
 
 func TestArithmeticExpressionFunction(t *testing.T) {
-	e := arithmeticExpression()
+	e := ArithmeticExpression()
 	b := aparser.CreateBuffer("abs(-5)")
 	checkRead(t, b, e)
 	checkPosition(t, b, 7)
@@ -98,7 +98,7 @@ func TestArithmeticExpressionFunction(t *testing.T) {
 }
 
 func TestArithmeticExpressionRelational(t *testing.T) {
-	e := arithmeticExpression()
+	e := ArithmeticExpression()
 	b := aparser.CreateBuffer("3 < 3")
 	checkRead(t, b, e)
 	checkPosition(t, b, 5)
@@ -142,7 +142,7 @@ func TestArithmeticExpressionRelational(t *testing.T) {
 }
 
 func TestArithmeticExpressionTernaryOperation(t *testing.T) {
-	e := arithmeticExpression()
+	e := ArithmeticExpression()
 	b := aparser.CreateBuffer("true ? 4 : 5")
 	checkRead(t, b, e)
 	checkPosition(t, b, 12)
@@ -166,7 +166,7 @@ func TestArithmeticExpressionTernaryOperation(t *testing.T) {
 }
 
 func TestArithmeticExpressionEquality(t *testing.T) {
-	e := arithmeticExpression()
+	e := ArithmeticExpression()
 	b := aparser.CreateBuffer("3 == 3")
 	checkRead(t, b, e)
 	checkPosition(t, b, 6)
