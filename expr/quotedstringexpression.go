@@ -15,30 +15,30 @@ func quotedString(qcs string, ecs string) quotedStringExpression {
 	return quotedStringExpression{abstractExpression: &a, quoteChars: qcs, escapeChars: ecs}
 }
 
-func (q quotedStringExpression) parse(buffer *Buffer) bool {
+func (q quotedStringExpression) parse(buffer *buffer) bool {
 	var quoteChar rune
-	if buffer.HasMoreChars() && q.isQuote(buffer.CurrentChar()) {
-		quoteChar = buffer.CurrentChar()
-		buffer.IncrementCurrentPosition()
+	if buffer.hasMoreChars() && q.isQuote(buffer.currentChar()) {
+		quoteChar = buffer.currentChar()
+		buffer.incrementCurrentPosition()
 	} else {
 		return false
 	}
-	for buffer.HasMoreChars() {
-		if buffer.CurrentChar() == quoteChar {
-			buffer.IncrementCurrentPosition()
+	for buffer.hasMoreChars() {
+		if buffer.currentChar() == quoteChar {
+			buffer.incrementCurrentPosition()
 			return true
 		}
-		for buffer.HasMoreChars() && buffer.CurrentChar() != quoteChar && !q.isEscape(buffer.CurrentChar()) {
-			buffer.IncrementCurrentPosition()
+		for buffer.hasMoreChars() && buffer.currentChar() != quoteChar && !q.isEscape(buffer.currentChar()) {
+			buffer.incrementCurrentPosition()
 		}
-		if !buffer.HasMoreChars() {
+		if !buffer.hasMoreChars() {
 			return false
 		}
-		if q.isEscape(buffer.CurrentChar()) {
-			if len(buffer.Rest()) < 2 {
+		if q.isEscape(buffer.currentChar()) {
+			if len(buffer.rest()) < 2 {
 				return false
 			}
-			buffer.SetCurrentPosition(buffer.CurrentPosition() + 2)
+			buffer.setCurrentPosition(buffer.currentPosition + 2)
 		}
 	}
 	return false

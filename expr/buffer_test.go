@@ -14,9 +14,9 @@ func TestCreateBuffer(t *testing.T) {
 
 func TestBuffer_Rest(t *testing.T) {
 	b := CreateBuffer("foo")
-	b.SetCurrentPosition(1)
-	if string(b.Rest()) != "oo" {
-		t.Error("Rest should be oo")
+	b.setCurrentPosition(1)
+	if string(b.rest()) != "oo" {
+		t.Error("rest should be oo")
 	}
 }
 
@@ -25,7 +25,7 @@ func TestBuffer_IncrementCurrentPosition(t *testing.T) {
 	if b.currentPosition != 0 {
 		t.Error("Current position should be 0")
 	}
-	b.IncrementCurrentPosition()
+	b.incrementCurrentPosition()
 	if b.currentPosition != 1 {
 		t.Error("Current position should be 1")
 	}
@@ -36,7 +36,7 @@ func TestBuffer_IncrementCurrentPositionBy(t *testing.T) {
 	if b.currentPosition != 0 {
 		t.Error("Current position should be 0")
 	}
-	b.IncrementCurrentPositionBy(2)
+	b.incrementCurrentPositionBy(2)
 	if b.currentPosition != 2 {
 		t.Error("Current position should be 2")
 	}
@@ -44,27 +44,27 @@ func TestBuffer_IncrementCurrentPositionBy(t *testing.T) {
 
 func TestBuffer_CurrentChar(t *testing.T) {
 	b := CreateBuffer("foo")
-	b.SetCurrentPosition(1)
-	if b.CurrentChar() != 'o' {
+	b.setCurrentPosition(1)
+	if b.currentChar() != 'o' {
 		t.Error("Current char should be o")
 	}
 }
 
 func TestBuffer_HasMoreChars(t *testing.T) {
 	b := CreateBuffer("foo")
-	if !b.HasMoreChars() {
-		t.Error("HasMoreChars should be true")
+	if !b.hasMoreChars() {
+		t.Error("hasMoreChars should be true")
 	}
-	b.IncrementCurrentPosition()
-	if !b.HasMoreChars() {
-		t.Error("HasMoreChars should be true")
+	b.incrementCurrentPosition()
+	if !b.hasMoreChars() {
+		t.Error("hasMoreChars should be true")
 	}
-	b.IncrementCurrentPosition()
-	if !b.HasMoreChars() {
-		t.Error("HasMoreChars should be true")
+	b.incrementCurrentPosition()
+	if !b.hasMoreChars() {
+		t.Error("hasMoreChars should be true")
 	}
-	b.IncrementCurrentPosition()
-	if b.HasMoreChars() {
-		t.Error("HasMoreChars should be false")
+	b.incrementCurrentPosition()
+	if b.hasMoreChars() {
+		t.Error("hasMoreChars should be false")
 	}
 }

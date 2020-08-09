@@ -4,23 +4,19 @@ import (
 	"aparser/ast"
 )
 
-type Buffer struct {
+type buffer struct {
 	text            []rune
 	currentPosition int
 	matchPosition   int
 	ast.Code
 }
 
-func CreateBuffer(text string) *Buffer {
-	b := Buffer{text: []rune(text), Code: ast.Code{}}
+func CreateBuffer(text string) *buffer {
+	b := buffer{text: []rune(text), Code: ast.Code{}}
 	return &b
 }
 
-func (b *Buffer) CurrentPosition() int {
-	return b.currentPosition
-}
-
-func (b *Buffer) SetCurrentPosition(value int) {
+func (b *buffer) setCurrentPosition(value int) {
 	if value >= 0 && value <= len(b.text) {
 		b.currentPosition = value
 	} else {
@@ -28,27 +24,23 @@ func (b *Buffer) SetCurrentPosition(value int) {
 	}
 }
 
-func (b *Buffer) IncrementCurrentPosition() {
-	b.SetCurrentPosition(b.currentPosition + 1)
+func (b *buffer) incrementCurrentPosition() {
+	b.setCurrentPosition(b.currentPosition + 1)
 }
 
-func (b *Buffer) IncrementCurrentPositionBy(value int) {
-	b.SetCurrentPosition(b.currentPosition + value)
+func (b *buffer) incrementCurrentPositionBy(value int) {
+	b.setCurrentPosition(b.currentPosition + value)
 }
 
-func (b *Buffer) Rest() []rune {
+func (b *buffer) rest() []rune {
 	return b.text[b.currentPosition:]
 }
 
-func (b *Buffer) MatchPosition() int {
-	return b.matchPosition
-}
-
-func (b *Buffer) CurrentMatch() string {
+func (b *buffer) currentMatch() string {
 	return string(b.text[b.matchPosition:b.currentPosition])
 }
 
-func (b *Buffer) SetMatchPosition(value int) {
+func (b *buffer) setMatchPosition(value int) {
 	if value >= 0 && value <= len(b.text) {
 		b.matchPosition = value
 	} else {
@@ -56,10 +48,10 @@ func (b *Buffer) SetMatchPosition(value int) {
 	}
 }
 
-func (b *Buffer) CurrentChar() rune {
+func (b *buffer) currentChar() rune {
 	return b.text[b.currentPosition]
 }
 
-func (b *Buffer) HasMoreChars() bool {
+func (b *buffer) hasMoreChars() bool {
 	return b.currentPosition < len(b.text)
 }

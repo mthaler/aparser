@@ -16,15 +16,15 @@ import (
 )
 
 type Expression interface {
-	parse(buffer *Buffer) bool
+	parse(buffer *buffer) bool
 	CreateNode() func(text string, code *ast.Code) interface{}
 	SetCreateNode(m func(text string, code *ast.Code) interface{})
 }
 
-func Parse(e Expression, b *Buffer) bool {
-	currentPosition := b.CurrentPosition()
-	matchPosition := b.MatchPosition()
-	b.SetMatchPosition(b.CurrentPosition())
+func Parse(e Expression, b *buffer) bool {
+	currentPosition := b.currentPosition
+	matchPosition := b.matchPosition
+	b.setMatchPosition(b.currentPosition)
 	codeBlockStart := b.CurrentCodeBlockStart()
 	codeBlockEnd := b.CurrentCodeBlockEndPosition()
 	b.SetCurrentCodeBlockStartPosition(codeBlockEnd)
@@ -36,19 +36,19 @@ func Parse(e Expression, b *Buffer) bool {
 			b.SetCurrentCodeBlock(result)
 		}
 	} else {
-		b.SetCurrentPosition(currentPosition)
-		b.SetMatchPosition(matchPosition)
+		b.setCurrentPosition(currentPosition)
+		b.setMatchPosition(matchPosition)
 		b.SetCurrentCodeBlockEndPosition(codeBlockEnd)
 	}
-	b.SetMatchPosition(matchPosition)
+	b.setMatchPosition(matchPosition)
 	b.SetCurrentCodeBlockStartPosition(codeBlockStart)
 	return match
 }
 
-func onMatch(e Expression, b *Buffer) interface{} {
+func onMatch(e Expression, b *buffer) interface{} {
 	m := e.CreateNode()
 	if m != nil {
-		return m(b.CurrentMatch(), &b.Code)
+		return m(b.currentMatch(), &b.Code)
 	} else {
 		return ast.PT
 	}

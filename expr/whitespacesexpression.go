@@ -13,12 +13,12 @@ func whiteSpaces() whitespacesExpression {
 	return whitespacesExpression{abstractExpression: &a}
 }
 
-func (w whitespacesExpression) parse(buffer *Buffer) bool {
-	pos := buffer.CurrentPosition()
-	for buffer.HasMoreChars() && unicode.IsSpace(buffer.CurrentChar()) {
-		buffer.IncrementCurrentPosition()
+func (w whitespacesExpression) parse(buffer *buffer) bool {
+	pos := buffer.currentPosition
+	for buffer.hasMoreChars() && unicode.IsSpace(buffer.currentChar()) {
+		buffer.incrementCurrentPosition()
 	}
-	return buffer.CurrentPosition() > pos
+	return buffer.currentPosition > pos
 }
 
 func optionalWhiteSpaces() Expression {

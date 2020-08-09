@@ -13,19 +13,19 @@ func identifier() identifierExpression {
 	return identifierExpression{abstractExpression: &a}
 }
 
-func (i identifierExpression) parse(buffer *Buffer) bool {
+func (i identifierExpression) parse(buffer *buffer) bool {
 	count := 0
-	for buffer.HasMoreChars() {
+	for buffer.hasMoreChars() {
 		if count == 0 {
-			if unicode.IsLetter(buffer.CurrentChar()) || buffer.CurrentChar() == '_' {
-				buffer.IncrementCurrentPosition()
+			if unicode.IsLetter(buffer.currentChar()) || buffer.currentChar() == '_' {
+				buffer.incrementCurrentPosition()
 				count++
 			} else {
 				break
 			}
 		} else {
-			if unicode.IsLetter(buffer.CurrentChar()) || unicode.IsDigit(buffer.CurrentChar()) || buffer.CurrentChar() == '_' {
-				buffer.IncrementCurrentPosition()
+			if unicode.IsLetter(buffer.currentChar()) || unicode.IsDigit(buffer.currentChar()) || buffer.currentChar() == '_' {
+				buffer.incrementCurrentPosition()
 				count++
 			} else {
 				break

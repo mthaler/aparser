@@ -6,21 +6,21 @@ import (
 	"testing"
 )
 
-func checkPosition(t *testing.T, b *Buffer, pos int) {
-	if b.CurrentPosition() != pos {
-		t.Errorf("Current position should be %d, actual %d", pos, b.CurrentPosition())
+func checkPosition(t *testing.T, b *buffer, pos int) {
+	if b.currentPosition != pos {
+		t.Errorf("Current position should be %d, actual %d", pos, b.currentPosition)
 	}
 }
 
-func checkRead(t *testing.T, b *Buffer, e Expression) {
+func checkRead(t *testing.T, b *buffer, e Expression) {
 	if !Parse(e, b) {
-		t.Errorf("Expression should be able to read %s", string(b.Rest()))
+		t.Errorf("Expression should be able to read %s", string(b.rest()))
 	}
 }
 
-func checkNotRead(t *testing.T, b *Buffer, e Expression) {
+func checkNotRead(t *testing.T, b *buffer, e Expression) {
 	if Parse(e, b) {
-		t.Errorf("Expression should not be able to read %v", string(b.Rest()))
+		t.Errorf("Expression should not be able to read %v", string(b.rest()))
 	}
 }
 

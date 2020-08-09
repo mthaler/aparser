@@ -15,9 +15,9 @@ func charLiteral(c rune) charLiteralExpression {
 	return charLiteralExpression{abstractExpression: &a, char: c}
 }
 
-func (c charLiteralExpression) parse(buffer *Buffer) bool {
-	if buffer.HasMoreChars() && buffer.CurrentChar() == c.char {
-		buffer.IncrementCurrentPosition()
+func (c charLiteralExpression) parse(buffer *buffer) bool {
+	if buffer.hasMoreChars() && buffer.currentChar() == c.char {
+		buffer.incrementCurrentPosition()
 		return true
 	} else {
 		return false
@@ -37,13 +37,13 @@ func doubleLiteral() doubleLiteralExpression {
 	return doubleLiteralExpression{abstractExpression: &a, regex: r}
 }
 
-func (d doubleLiteralExpression) parse(buffer *Buffer) bool {
-	if buffer.HasMoreChars() {
-		loc := d.regex.FindStringIndex(string(buffer.Rest()))
+func (d doubleLiteralExpression) parse(buffer *buffer) bool {
+	if buffer.hasMoreChars() {
+		loc := d.regex.FindStringIndex(string(buffer.rest()))
 		text := make([]rune, 0)
 		if loc != nil {
-			text = buffer.Rest()[loc[0]:loc[1]]
-			buffer.IncrementCurrentPositionBy(len(text))
+			text = buffer.rest()[loc[0]:loc[1]]
+			buffer.incrementCurrentPositionBy(len(text))
 		}
 		if len(text) > 0 {
 			return true
@@ -62,13 +62,13 @@ func stringLiteral(s string) stringLiteralExpression {
 	return stringLiteralExpression{abstractExpression: &a, str: s}
 }
 
-func (s stringLiteralExpression) parse(buffer *Buffer) bool {
-	if !buffer.HasMoreChars() {
+func (s stringLiteralExpression) parse(buffer *buffer) bool {
+	if !buffer.hasMoreChars() {
 		return false
-	} else if len(buffer.Rest()) < len(s.str) {
+	} else if len(buffer.rest()) < len(s.str) {
 		return false
-	} else if string(buffer.Rest()[:len(s.str)]) == s.str {
-		buffer.IncrementCurrentPositionBy(len(s.str))
+	} else if string(buffer.rest()[:len(s.str)]) == s.str {
+		buffer.incrementCurrentPositionBy(len(s.str))
 		return true
 	} else {
 		return false
@@ -85,13 +85,13 @@ func caseInsensitiveStringLiteral(s string) caseInsensitiveStringLiteralExpressi
 	return caseInsensitiveStringLiteralExpression{abstractExpression: &a, str: strings.ToLower(s)}
 }
 
-func (c caseInsensitiveStringLiteralExpression) parse(buffer *Buffer) bool {
-	if !buffer.HasMoreChars() {
+func (c caseInsensitiveStringLiteralExpression) parse(buffer *buffer) bool {
+	if !buffer.hasMoreChars() {
 		return false
-	} else if len(buffer.Rest()) < len(c.str) {
+	} else if len(buffer.rest()) < len(c.str) {
 		return false
-	} else if strings.ToLower(string(buffer.Rest()[:len(c.str)])) == c.str {
-		buffer.SetCurrentPosition(buffer.CurrentPosition() + len(c.str))
+	} else if strings.ToLower(string(buffer.rest()[:len(c.str)])) == c.str {
+		buffer.setCurrentPosition(buffer.currentPosition + len(c.str))
 		return true
 	} else {
 		return false

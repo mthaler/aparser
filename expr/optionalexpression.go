@@ -10,7 +10,7 @@ func optional(e Expression) optionalExpression {
 	return optionalExpression{abstractExpression: &a, expression: e}
 }
 
-func (o optionalExpression) parse(buffer *Buffer) bool {
+func (o optionalExpression) parse(buffer *buffer) bool {
 	Parse(o.expression, buffer)
 	return true
 }

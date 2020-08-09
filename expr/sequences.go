@@ -11,7 +11,7 @@ func sequence(e1 Expression, e2 Expression) sequenceExpression {
 	return sequenceExpression{abstractExpression: &a, expression1: e1, expression2: e2}
 }
 
-func (s sequenceExpression) parse(buffer *Buffer) bool {
+func (s sequenceExpression) parse(buffer *buffer) bool {
 	if Parse(s.expression1, buffer) && Parse(s.expression2, buffer) {
 		return true
 	}
@@ -28,7 +28,7 @@ func zeroOrMore(e Expression) zeroOrMoreExpression {
 	return zeroOrMoreExpression{abstractExpression: &a, expression: e}
 }
 
-func (z zeroOrMoreExpression) parse(buffer *Buffer) bool {
+func (z zeroOrMoreExpression) parse(buffer *buffer) bool {
 	for Parse(z.expression, buffer) {
 	}
 	return true
@@ -44,7 +44,7 @@ func oneOrMore(e Expression) oneOrMoreExpression {
 	return oneOrMoreExpression{abstractExpression: &a, expression: e}
 }
 
-func (o oneOrMoreExpression) parse(buffer *Buffer) bool {
+func (o oneOrMoreExpression) parse(buffer *buffer) bool {
 	success := false
 	for Parse(o.expression, buffer) {
 		success = true

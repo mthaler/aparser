@@ -9,9 +9,9 @@ func Test_charLiteralExpression_Read(t *testing.T) {
 	e := charLiteral('s')
 	b := CreateBuffer("test")
 	checkNotRead(t, b, e)
-	b.IncrementCurrentPosition()
+	b.incrementCurrentPosition()
 	checkNotRead(t, b, e)
-	b.IncrementCurrentPosition()
+	b.incrementCurrentPosition()
 	checkRead(t, b, e)
 }
 

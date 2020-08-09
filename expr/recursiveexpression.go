@@ -10,7 +10,7 @@ func recursive() recursiveExpression {
 	return recursiveExpression{abstractExpression: &a}
 }
 
-func (r recursiveExpression) parse(buffer *Buffer) bool {
+func (r recursiveExpression) parse(buffer *buffer) bool {
 	if r.value == nil {
 		panic("Value must be set to an expression before reading an expression!")
 	}
