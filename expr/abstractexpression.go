@@ -1,7 +1,7 @@
 package expr
 
 import (
-	"aparser/ast"
+	"github.com/mthaler/aparser/ast"
 )
 
 type abstractExpression struct {

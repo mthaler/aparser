@@ -1,8 +1,9 @@
 package expr
 
 import (
-	"aparser/ast"
 	"testing"
+
+	"github.com/mthaler/aparser/ast"
 )
 
 func Test_charLiteralExpression_Read(t *testing.T) {

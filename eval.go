@@ -5,8 +5,8 @@ It also provides a pre-build arithmetic expression parser that supports parsing 
 package aparser
 
 import (
-	"aparser/ast"
-	"aparser/expr"
+	"github.com/mthaler/aparser/ast"
+	"github.com/mthaler/aparser/expr"
 )
 
 // Eval evaluates the given arithmetic expression using the pre-build arithmetic expression parser.

@@ -1,8 +1,9 @@
 package expr
 
 import (
-	"aparser/ast"
 	"testing"
+
+	"github.com/mthaler/aparser/ast"
 )
 
 func TestArithmeticExpressionLiteral(t *testing.T) {

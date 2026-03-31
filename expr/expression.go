@@ -12,7 +12,7 @@ literal expression that parses both "false" or "true".
 package expr
 
 import (
-	"aparser/ast"
+	"github.com/mthaler/aparser/ast"
 )
 
 type Expression interface {

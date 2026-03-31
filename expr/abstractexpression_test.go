@@ -1,9 +1,10 @@
 package expr
 
 import (
-	"aparser/ast"
 	"reflect"
 	"testing"
+
+	"github.com/mthaler/aparser/ast"
 )
 
 func checkPosition(t *testing.T, b *buffer, pos int) {
