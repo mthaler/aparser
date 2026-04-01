@@ -60,3 +60,7 @@ func parseStringOperand(s string) (operandNode, error) {
 func (s stringOperand) Evaluate() (interface{}, error) {
 	return s.Value, nil
 }
+
+func (s stringOperand) String() string {
+	return s.Value
+}
