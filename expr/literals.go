@@ -5,25 +5,6 @@ import (
 	"strings"
 )
 
-type charLiteralExpression struct {
-	*abstractExpression
-	char rune
-}
-
-func charLiteral(c rune) charLiteralExpression {
-	a := abstractExpression{}
-	return charLiteralExpression{abstractExpression: &a, char: c}
-}
-
-func (c charLiteralExpression) parse(buffer *buffer) bool {
-	if buffer.hasMoreChars() && buffer.currentChar() == c.char {
-		buffer.incrementCurrentPosition()
-		return true
-	} else {
-		return false
-	}
-}
-
 var doubleLiteralRegex = "^\\d+(\\.\\d*)?([eE][+-]?\\d+)?"
 
 type doubleLiteralExpression struct {
