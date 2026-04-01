@@ -106,3 +106,7 @@ func (c caseInsensitiveStringLiteralExpression) parse(buffer *buffer) bool {
 		return false
 	}
 }
+
+func (c caseInsensitiveStringLiteralExpression) String() string {
+	return c.str
+}
