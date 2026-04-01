@@ -1,9 +1,33 @@
 package expr
 
 import (
+	"fmt"
 	"regexp"
 	"strings"
 )
+
+type charLiteralExpression struct {
+	*abstractExpression
+	char rune
+}
+
+func charLiteral(c rune) charLiteralExpression {
+	a := abstractExpression{}
+	return charLiteralExpression{abstractExpression: &a, char: c}
+}
+
+func (c charLiteralExpression) parse(buffer *buffer) bool {
+	if buffer.hasMoreChars() && buffer.currentChar() == c.char {
+		buffer.incrementCurrentPosition()
+		return true
+	} else {
+		return false
+	}
+}
+
+func (c charLiteralExpression) String() string {
+	return fmt.Sprint(c.char)
+}
 
 var doubleLiteralRegex = "^\\d+(\\.\\d*)?([eE][+-]?\\d+)?"
 
@@ -31,6 +55,33 @@ func (d doubleLiteralExpression) parse(buffer *buffer) bool {
 		}
 	}
 	return false
+}
+
+type stringLiteralExpression struct {
+	*abstractExpression
+	str string
+}
+
+func stringLiteral(s string) stringLiteralExpression {
+	a := abstractExpression{}
+	return stringLiteralExpression{abstractExpression: &a, str: s}
+}
+
+func (s stringLiteralExpression) parse(buffer *buffer) bool {
+	if !buffer.hasMoreChars() {
+		return false
+	} else if len(buffer.rest()) < len(s.str) {
+		return false
+	} else if string(buffer.rest()[:len(s.str)]) == s.str {
+		buffer.incrementCurrentPositionBy(len(s.str))
+		return true
+	} else {
+		return false
+	}
+}
+
+func (s stringLiteralExpression) String() string {
+	return s.str
 }
 
 type caseInsensitiveStringLiteralExpression struct {

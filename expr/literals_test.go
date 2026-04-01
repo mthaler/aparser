@@ -6,6 +6,16 @@ import (
 	"github.com/mthaler/aparser/ast"
 )
 
+func Test_charLiteralExpression_Read(t *testing.T) {
+	e := charLiteral('s')
+	b := CreateBuffer("test")
+	checkNotRead(t, b, e)
+	b.incrementCurrentPosition()
+	checkNotRead(t, b, e)
+	b.incrementCurrentPosition()
+	checkRead(t, b, e)
+}
+
 func TestDoubleLiteralExpression_Read(t *testing.T) {
 	e := doubleLiteral()
 	e.SetCreateNode(ast.CreateDoubleOperand)
