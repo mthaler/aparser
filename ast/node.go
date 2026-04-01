@@ -7,5 +7,5 @@ Operations represent arithmetic operations, e.g. addition, subtraction etc.
 package ast
 
 type Node interface {
-	Evaluate() (interface{}, error)
+	Evaluate(v interface{}) (interface{}, error)
 }

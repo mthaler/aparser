@@ -12,12 +12,12 @@ type binaryOperation struct {
 	operator string
 }
 
-func (b binaryOperation) Evaluate() (interface{}, error) {
-	l, err := b.left.Evaluate()
+func (b binaryOperation) Evaluate(v interface{}) (interface{}, error) {
+	l, err := b.left.Evaluate(nil)
 	if err != nil {
 		return nil, err
 	}
-	r, err := b.right.Evaluate()
+	r, err := b.right.Evaluate(nil)
 	if err != nil {
 		return nil, err
 	}

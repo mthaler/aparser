@@ -26,7 +26,7 @@ func parseBoolOperand(s string) (operandNode, error) {
 	return newBoolOperand(b), err
 }
 
-func (b boolOperand) Evaluate() (interface{}, error) {
+func (b boolOperand) Evaluate(v interface{}) (interface{}, error) {
 	return b.Value, nil
 }
 
@@ -43,7 +43,7 @@ func parseDoubleOperand(s string) (operandNode, error) {
 	return newDoubleOperand(f), err
 }
 
-func (d doubleOperand) Evaluate() (interface{}, error) {
+func (d doubleOperand) Evaluate(v interface{}) (interface{}, error) {
 	return d.Value, nil
 }
 
@@ -64,7 +64,7 @@ func parseStringOperand(s string) (operandNode, error) {
 	return newStringOperand(s), nil
 }
 
-func (s stringOperand) Evaluate() (interface{}, error) {
+func (s stringOperand) Evaluate(v interface{}) (interface{}, error) {
 	return s.Value, nil
 }
 

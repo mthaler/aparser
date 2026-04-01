@@ -7,7 +7,7 @@ func Test_createUnaryNode(t *testing.T) {
 	o := newDoubleOperand(3.14)
 	code := []interface{}{u, o}
 	n := createUnaryNode(code)
-	v, err := n.Evaluate()
+	v, err := n.Evaluate(nil)
 	if err != nil {
 		t.Error(err)
 	}
@@ -22,7 +22,7 @@ func Test_createBinaryNode(t *testing.T) {
 	r := newDoubleOperand(4)
 	code := []interface{}{b, l, r}
 	n := createBinaryNode(code)
-	v, err := n.Evaluate()
+	v, err := n.Evaluate(nil)
 	if err != nil {
 		t.Error(err)
 	}

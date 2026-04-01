@@ -10,7 +10,7 @@ func checkEvaluate(t *testing.T, o, expected interface{}) {
 	if !ok {
 		t.Errorf("Object %v not a node", o)
 	}
-	r, err := n.Evaluate()
+	r, err := n.Evaluate(nil)
 	if err != nil {
 		t.Errorf("Could not evalue node %v", n)
 	}

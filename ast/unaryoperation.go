@@ -11,8 +11,8 @@ type unaryOperation struct {
 	funcName string
 }
 
-func (u unaryOperation) Evaluate() (interface{}, error) {
-	v, err := u.node.Evaluate()
+func (u unaryOperation) Evaluate(v interface{}) (interface{}, error) {
+	v, err := u.node.Evaluate(nil)
 	if err != nil {
 		return nil, err
 	}

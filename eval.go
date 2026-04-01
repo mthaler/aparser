@@ -15,5 +15,5 @@ func Eval(s string) (interface{}, error) {
 	e := expr.ArithmeticExpression()
 	expr.Parse(e, b)
 	a := ast.CreateAST(b.Code.Code)
-	return a.Evaluate()
+	return a.Evaluate(nil)
 }

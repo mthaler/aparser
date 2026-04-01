@@ -12,16 +12,16 @@ type ternaryOperation struct {
 	operator string
 }
 
-func (t ternaryOperation) Evaluate() (interface{}, error) {
-	l, err := t.left.Evaluate()
+func (t ternaryOperation) Evaluate(v interface{}) (interface{}, error) {
+	l, err := t.left.Evaluate(nil)
 	if err != nil {
 		return nil, err
 	}
-	m, err := t.middle.Evaluate()
+	m, err := t.middle.Evaluate(nil)
 	if err != nil {
 		return nil, err
 	}
-	r, err := t.right.Evaluate()
+	r, err := t.right.Evaluate(nil)
 	if err != nil {
 		return nil, err
 	}
