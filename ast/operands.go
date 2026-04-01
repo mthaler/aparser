@@ -1,6 +1,9 @@
 package ast
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
 type operandNode struct {
 	Node
@@ -42,6 +45,10 @@ func parseDoubleOperand(s string) (operandNode, error) {
 
 func (d doubleOperand) Evaluate() (interface{}, error) {
 	return d.Value, nil
+}
+
+func (d doubleOperand) String() string {
+	return fmt.Sprint(d.Value)
 }
 
 type stringOperand struct {
